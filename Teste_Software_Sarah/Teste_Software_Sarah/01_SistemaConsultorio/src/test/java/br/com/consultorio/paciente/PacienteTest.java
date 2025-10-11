@@ -7,21 +7,28 @@ class PacienteTest {
 
     @Test
     void testPaciente() {
-        // Criando um paciente
-        Paciente paciente = new Paciente("Ana Silva", "123.456.789-00", "(61) 91234-5678");
+        // Criando paciente
+        Paciente paciente = new Paciente("Carlos Souza", "123.456.789-00", "(61) 91234-5678");
 
-        // Testar getters
-        assertEquals("Ana Silva", paciente.getNome());
+        // ==========================
+        // Testando getters
+        // ==========================
+        assertEquals("Carlos Souza", paciente.getNome());
         assertEquals("123.456.789-00", paciente.getCpf());
         assertEquals("(61) 91234-5678", paciente.getTelefone());
 
-        // Testar setters
-        paciente.setNome("Carlos Souza");
-        paciente.setTelefone("(61) 99876-5432");
-        assertEquals("Carlos Souza", paciente.getNome());
-        assertEquals("(61) 99876-5432", paciente.getTelefone());
+        // ==========================
+        // Testando setters
+        // ==========================
+        paciente.setNome("Carlos S.");
+        paciente.setTelefone("(61) 98765-4321");
+        assertEquals("Carlos S.", paciente.getNome());
+        assertEquals("(61) 98765-4321", paciente.getTelefone());
 
-        // Testar método que imprime mensagem
-        paciente.esperarAtendimento(); // só garante que não lança exceção
+        // ==========================
+        // Testando método específico
+        // ==========================
+        paciente.esperarAtendimento(); // Deve imprimir mensagem de espera
     }
 }
+

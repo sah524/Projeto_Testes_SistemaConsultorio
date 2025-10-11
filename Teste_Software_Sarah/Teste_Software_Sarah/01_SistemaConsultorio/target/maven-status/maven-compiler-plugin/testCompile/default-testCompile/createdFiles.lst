@@ -1,4 +1,4 @@
-br\com\consultorio\agendamento\ConsultaPresencial.class
+br\com\consultorio\agendamento\ConsultaPresencialTest.class
 br\com\consultorio\medico\MedicoTest.class
 br\com\consultorio\paciente\PacienteTest.class
 br\com\consultorio\agendamento\ConsultaOnlineTest.class

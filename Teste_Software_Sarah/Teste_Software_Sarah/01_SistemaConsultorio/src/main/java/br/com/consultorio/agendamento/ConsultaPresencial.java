@@ -19,11 +19,11 @@ public class ConsultaPresencial extends Consulta {
         }
     }
 
-    // Sobrescrevendo o método da interface
+    // Sobrescrevendo o método da interface (presumivelmente da classe mãe)
     @Override
     public void agendarConsulta() {
         super.agendarConsulta(); // executa o método original da classe mãe
-        System.out.println("Essa e uma consulta presencial para o dia " + getData() + " as " + getHora() + ".");
+        System.out.println("Essa é uma consulta presencial para o dia " + getData() + " às " + getHora() + ".");
     }
 
     // Getters e Setters
@@ -35,5 +35,16 @@ public class ConsultaPresencial extends Consulta {
         this.consultorio = consultorio;
     }
 
-}
+    public int getLocal() {
+        return consultorio;
+    }
 
+    public void setLocal(int consultorio) {
+        this.consultorio = consultorio;
+    }
+
+    public void consultarMedico() {
+        // Implementação futura, se necessário
+        System.out.println("Consultando médico...");
+    }
+}

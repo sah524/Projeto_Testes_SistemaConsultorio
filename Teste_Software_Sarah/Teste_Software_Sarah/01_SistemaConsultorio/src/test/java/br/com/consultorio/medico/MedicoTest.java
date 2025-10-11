@@ -7,20 +7,26 @@ class MedicoTest {
 
     @Test
     void testMedico() {
-        // Criando um médico
-        Medico medico = new Medico("Dr. João", "Cardiologia");
+        // Criando médico
+        Medico medico = new Medico("Dra. Maria", "Cardiologia");
 
-        // Testar getters
-        assertEquals("Dr. João", medico.getNome());
+        // ==========================
+        // Testando getters
+        // ==========================
+        assertEquals("Dra. Maria", medico.getNome());
         assertEquals("Cardiologia", medico.getEspecialidade());
 
-        // Testar setters
-        medico.setNome("Dra. Maria");
-        medico.setEspecialidade("Pediatria");
-        assertEquals("Dra. Maria", medico.getNome());
-        assertEquals("Pediatria", medico.getEspecialidade());
+        // ==========================
+        // Testando setters
+        // ==========================
+        medico.setNome("Dra. M. Silva");
+        medico.setEspecialidade("Clínica Geral");
+        assertEquals("Dra. M. Silva", medico.getNome());
+        assertEquals("Clínica Geral", medico.getEspecialidade());
 
-        // Testar o método que imprime mensagem
-        medico.atenderPacientes(); // só garante que não lança exceção
+        // ==========================
+        // Testando método específico
+        // ==========================
+        medico.atenderPacientes(); // Deve imprimir mensagem de atendimento
     }
 }

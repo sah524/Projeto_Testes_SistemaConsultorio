@@ -1,0 +1,13 @@
+-------------------------------------------------------------------------------
+Test set: br.com.consultorio.interfaces.IAgendavelTest
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 0.061 s <<< FAILURE! -- in br.com.consultorio.interfaces.IAgendavelTest
+br.com.consultorio.interfaces.IAgendavelTest.testAgendarConsulta -- Time elapsed: 0.030 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: The test case is a prototype.
+	at org.junit.jupiter.api.AssertionUtils.fail(AssertionUtils.java:38)
+	at org.junit.jupiter.api.Assertions.fail(Assertions.java:138)
+	at br.com.consultorio.interfaces.IAgendavelTest.testAgendarConsulta(IAgendavelTest.java:48)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1604)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1604)
+

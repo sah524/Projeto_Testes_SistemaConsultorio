@@ -1,7 +1,0 @@
-br\com\consultorio\interfaces\IAgendavel.class
-br\com\consultorio\agendamento\Consulta.class
-br\com\consultorio\medico\Medico.class
-br\com\consultorio\paciente\Paciente.class
-br\com\consultorio\agendamento\ConsultaPresencial.class
-br\com\consultorio\agendamento\ConsultaOnline.class
-br\com\consultorio\main\Main.class

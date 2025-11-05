@@ -1,48 +1,92 @@
 package br.com.consultorio.main;
 
-import br.com.consultorio.paciente.Paciente;
-import br.com.consultorio.medico.Medico;
-import br.com.consultorio.agendamento.Consulta;
-import br.com.consultorio.agendamento.ConsultaOnline;
-import br.com.consultorio.agendamento.ConsultaPresencial;
+import br.com.consultorio.config.Conexao;
+import br.com.consultorio.login.LoginMenu;
+import br.com.consultorio.login.Usuario;
+import br.com.consultorio.paciente.PacienteMenu;
+import br.com.consultorio.agendamento.ConsultaMenu;
+
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.util.Scanner;
 
 public class Main {
+
     public static void main(String[] args) {
 
-        try {
-            // Criando paciente
-            Paciente paciente1 = new Paciente("Ana Silva", "123.456.789-00", "(61) 91234-5678");
-            paciente1.esperarAtendimento();
+        try (Scanner sc = new Scanner(System.in)) {
+            LoginMenu loginMenu = new LoginMenu();
+            PacienteMenu pacienteMenu = new PacienteMenu();
+            ConsultaMenu consultaMenu = new ConsultaMenu();
 
-            // Criando médico
-            Medico medico1 = new Medico("Dr. Joao", "Cardiologia");
-            medico1.atenderPacientes();
+            Usuario usuarioLogado = null;
 
-            System.out.println("--------------------------------------------------");
+            // Loop de login
+            while (usuarioLogado == null) {
+                usuarioLogado = loginMenu.realizarLogin(); // retorna objeto Usuario
 
-            // Consulta comum
-            Consulta consulta1 = new Consulta("14/06/2026", "19:00");
-            consulta1.agendarConsulta();
+                if (usuarioLogado == null) {
+                    System.out.println("Usuario nao encontrado. Deseja criar uma conta? (S/N)");
+                    String opcao = sc.nextLine();
+                    if (opcao.equalsIgnoreCase("S")) {
+                        usuarioLogado = loginMenu.cadastrarUsuario(); // retorna Usuario cadastrado
+                    } else {
+                        System.out.println("Retornando ao login...");
+                    }
+                }
+            }
 
-            System.out.println("--------------------------------------------------");
+            // Conexao com o banco apenas UMA vez apos login
+            try (Connection con = Conexao.getConexao()) {
+                if (con != null) {
+                    System.out.println("Conexao com o banco consultorio_db realizada com sucesso!");
+                }
+            } catch (SQLException e) {
+                System.out.println("Erro ao conectar no banco: " + e.getMessage());
+                return;
+            }
 
-            // Consulta presencial
-            ConsultaPresencial consultaPresencial = new ConsultaPresencial("15/06/2025", "14:30", 12);
-            consultaPresencial.agendarConsulta();
-            consultaPresencial.verificarConsultorio();
+            System.out.println("Bem-vindo ao sistema " + usuarioLogado.getLogin() + "!");
 
-            System.out.println("--------------------------------------------------");
+            int escolha = -1;
+            do {
+                System.out.println("\n====================================");
+                System.out.println("           MENU PRINCIPAL");
+                System.out.println("====================================");
+                System.out.println("1 - Cadastrar Paciente");
+                System.out.println("2 - Cadastrar Consulta");
+                System.out.println("3 - Listar Consultas");
+                System.out.println("4 - Listar Pacientes");
+                System.out.println("5 - Atualizar Paciente");
+                System.out.println("6 - Excluir Paciente");  // Nova opção acrescentada
+                System.out.println("7 - Excluir Consulta");
+                System.out.println("8 - Excluir Usuario");
+                System.out.println("0 - Sair");
+                System.out.print("Escolha uma opcao: ");
+                
+                String entrada = sc.nextLine().trim();
 
-            // Consulta online
-            ConsultaOnline consultaOnline = new ConsultaOnline("16/06/2025", "10:00", "https://meet.link/consulta123");
-            consultaOnline.agendarConsulta();
-            consultaOnline.enviarLink();
+                try {
+                    escolha = Integer.parseInt(entrada);
+                } catch (NumberFormatException e) {
+                    System.out.println("Entrada invalida! Digite apenas numeros de 0 a 8.");
+                    continue; // volta para o início do loop sem quebrar o programa
+                }
 
-            System.out.println("--------------------------------------------------");
+                switch (escolha) {
+                    case 1 -> pacienteMenu.cadastrarPaciente();
+                    case 2 -> consultaMenu.iniciar();
+                    case 3 -> consultaMenu.listarConsultas();
+                    case 4 -> pacienteMenu.listarPacientes();
+                    case 5 -> pacienteMenu.atualizarPaciente(); 
+                    case 6 -> pacienteMenu.excluirPaciente();
+                    case 7 -> consultaMenu.excluirConsulta();
+                    case 8 -> loginMenu.excluirUsuario();
+                    case 0 -> System.out.println("Saindo do sistema...");
+                    default -> System.out.println("Opcao invalida! Digite um numero de 0 a 8.");
+                }
 
-        } catch (Exception e) {
-            System.out.println("Ocorreu um erro durante a execucao do sistema: " + e);
+            } while (escolha != 0);
         }
     }
 }
-

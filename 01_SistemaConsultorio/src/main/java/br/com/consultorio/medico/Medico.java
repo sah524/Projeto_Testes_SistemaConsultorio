@@ -1,35 +1,32 @@
 package br.com.consultorio.medico;
 
 public class Medico {
-// Atributos
-private String nome;
-private String especialidade;
 
-// Método
-public void atenderPacientes() {
-System.out.println("Medico " + nome + " atendendo.");
-}
+    private String nome;
+    private String especialidade;
 
-// Construtor (obriga os atributos a serem inicializados)
-public Medico(String nome, String especialidade) {
-this.nome = nome;
-this.especialidade = especialidade;
-}
+    public Medico(String nome, String especialidade) {
+        this.nome = nome;
+        this.especialidade = especialidade;
+    }
 
-// Getters e Setters
-public String getNome() {
-return nome;
-}
+    public void atenderPacientes() {
+        System.out.println("Medico " + nome + " atendendo.");
+    }
 
-public void setNome(String nome) {
-this.nome = nome;
-}
+    public String getNome() {
+        return nome;
+    }
 
-public String getEspecialidade() {
-return especialidade;
-}
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
 
-public void setEspecialidade(String especialidade) {
-this.especialidade = especialidade;
-}
+    public String getEspecialidade() {
+        return especialidade;
+    }
+
+    public void setEspecialidade(String especialidade) {
+        this.especialidade = especialidade;
+    }
 }

@@ -7,21 +7,19 @@ class PacienteTest {
 
     @Test
     void testPaciente() {
-        // Criando um paciente
+        // Cenário 1: Verificar criação e leitura dos dados do paciente
         Paciente paciente = new Paciente("Ana Silva", "123.456.789-00", "(61) 91234-5678");
-
-        // Testar getters
         assertEquals("Ana Silva", paciente.getNome());
         assertEquals("123.456.789-00", paciente.getCpf());
         assertEquals("(61) 91234-5678", paciente.getTelefone());
 
-        // Testar setters
+        // Cenário 2: Atualizar dados do paciente e verificar se foram alterados corretamente
         paciente.setNome("Carlos Souza");
         paciente.setTelefone("(61) 99876-5432");
         assertEquals("Carlos Souza", paciente.getNome());
         assertEquals("(61) 99876-5432", paciente.getTelefone());
 
-        // Testar método que imprime mensagem
-        paciente.esperarAtendimento(); // só garante que não lança exceção
+        // Teste adicional: chamar método de ação do paciente
+        paciente.esperarAtendimento(); // apenas garante que o método executa sem erro
     }
 }
